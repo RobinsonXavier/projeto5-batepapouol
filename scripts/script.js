@@ -12,7 +12,11 @@ let entrando = () => {
     let promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", entrada);
     console.log(promise);
 
-    receberMensagens();
+    promise.then(receberMensagens)
+
+    promise.catch()
+
+    
     
 }
 
@@ -98,6 +102,10 @@ let enviarMensagem = () => {
 
     const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", mensagemPronta);
 
+    promise.then(atualizar);
+
+    promise.catch(atualizarPagina);
+
     document.querySelector(".bottom input").value = "";
 }
 
@@ -114,9 +122,22 @@ let interacaoEscrever = () => {
 }
 //situação de acerto e de erro baseado na resposta do servidor
 
-//interações js, html e css
+let seErrar = () => {
 
-//bonus
+    lindoNome = prompt("O nome já está sendo utilizando, escreva outro lindo nome:");
+
+    const entrada = {
+        name: lindoNome
+    };
+
+    let promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", entrada);
+
+    promise.then(receberMensagens);
+
+    promise.catch(seErrar);
+}
+
+let atualizarPagina = () => window.location.reload();
 
 
 entrando();

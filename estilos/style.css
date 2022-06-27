@@ -63,9 +63,10 @@ h2 {
 }
 
 .conteudo {
-    margin: 85px 0;
     background-color: #E5E5E5;
     z-index: 1;
+    padding-top:95px;
+    padding-bottom: 95px;
 }
 
 .conteudo span {
@@ -149,9 +150,17 @@ h2 {
 }
 
 
-@media (max-width: 414px) {
+@media (max-width: 375px) {
+    .top {
+        width: 375px;
+    }
+
+    .bottom {
+        width: 375px;
+    }
 
     .molde {
+        width: 100%;
         overflow-x: hidden;
     }
 
