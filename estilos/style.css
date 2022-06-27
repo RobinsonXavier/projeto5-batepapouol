@@ -9,12 +9,17 @@ strong {
 
 span {
     color: #000000;
+    font-weight: 400;
 }
 
 input {
     border: none;
     height: 35px;
     font-size: 18px;
+}
+
+input:focus {
+    outline: none;
 }
 
 h2 {
@@ -53,6 +58,10 @@ h2 {
     font-size: 42px;
 }
 
+.bottom ion-icon:hover {
+    cursor: pointer;
+}
+
 .conteudo {
     margin: 85px 0;
     background-color: #E5E5E5;
@@ -65,6 +74,9 @@ h2 {
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 9px;
+    padding-right: 3px;
+    line-height: 22px;
+    overflow-wrap: break-word;
 
 }
 
@@ -140,7 +152,6 @@ h2 {
 @media (max-width: 414px) {
 
     .molde {
-        height: 220vw;
         overflow-x: hidden;
     }
 

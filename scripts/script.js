@@ -44,17 +44,17 @@ let respostaRecebida = (resposta) => {
 
 let spanMensagemStatus = (msg) => {
     
-    return `<span class="status">(${msg.time}) <strong>${msg.from}<strong> entra na sala...</span>`
+    return `<span class="status">(${msg.time}) <strong>${msg.from}</strong> ${msg.text}</span>`
 }
 
 let spanMensagemTodos = (msg) => {
     
-    return `<span class="todos">(${msg.time}) <strong>${msg.from}<strong> para <strong>Todos<strong>: ${msg.text}</span>`
+    return `<span class="todos">(${msg.time}) <strong>${msg.from}</strong> para <strong>Todos</strong>: ${msg.text}</span>`
 }
 
 let spanMensagemPrivada = (msg) => {
     
-    return `<span class="privado">(${msg.time}) <strong>${msg.from}<strong> reservadamente para <strong>${msg.to}<strong>: ${msg.text}</span>`
+    return `<span class="privado">(${msg.time}) <strong>${msg.from}</strong> reservadamente para <strong>${msg.to}</strong>: ${msg.text}</span>`
 }
 
 let renderizarMensagem = (mensagens) => {
@@ -65,21 +65,53 @@ let renderizarMensagem = (mensagens) => {
     for(let i = 0; i < listaMensagens.length; i++) {
         let mensagem = listaMensagens[i];
 
-        if(mensagem.type == "status") {
+        if(mensagem.type === "status") {
             conteudo.innerHTML += spanMensagemStatus(mensagem);
 
-        } else if(mensagem.to !== "todos" || mensagem.to !== "status") {
+        } else if(mensagem.to === "Todos") {
+            conteudo.innerHTML += spanMensagemTodos(mensagem);
+
+        } else {
             conteudo.innerHTML += spanMensagemPrivada(mensagem);
         }
-
-        conteudo.innerHTML += spanMensagemTodos(mensagem)
     }
+    conteudo.scrollIntoView(false);
 }
 
+//questão semantica somente
+let atualizar = () => {
+    receberMensagens();
+}
 
 //enviar mensagens para o servidor
 
+let enviarMensagem = () => {
 
+    let mensagemEscrita = document.querySelector(".bottom input").value;
+
+    let mensagemPronta = {
+        from: lindoNome,
+        to: "Todos",
+        text: mensagemEscrita,
+        type: "message"
+    }
+
+    const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", mensagemPronta);
+
+    document.querySelector(".bottom input").value = "";
+}
+
+let interacaoEscrever = () => {
+
+    let valorZerado = document.querySelector(".bottom input");
+
+    if (valorZerado.value === "Escreva aqui...") {
+
+        valorZerado.value = ""
+    }
+    
+    
+}
 //situação de acerto e de erro baseado na resposta do servidor
 
 //interações js, html e css
@@ -89,3 +121,4 @@ let renderizarMensagem = (mensagens) => {
 
 entrando();
 setInterval(online, 5000);
+setInterval(atualizar, 3000);
